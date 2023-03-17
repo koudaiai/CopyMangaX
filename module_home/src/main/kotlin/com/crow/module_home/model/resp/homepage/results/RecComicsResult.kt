@@ -15,5 +15,4 @@ data class RecComicsResult(
 
     @Json(name = "comic")
     val mComic: ComicResultXX,
-
-    )
+)

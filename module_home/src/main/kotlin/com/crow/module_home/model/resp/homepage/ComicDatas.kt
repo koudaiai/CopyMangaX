@@ -16,7 +16,7 @@ data class ComicDatas<T>(
 
 
     @Json(name = "list")
-    val mResult: List<T>,
+    var mResult: List<T>,
 
     @Json(name = "offset")
     val offset: Int,
