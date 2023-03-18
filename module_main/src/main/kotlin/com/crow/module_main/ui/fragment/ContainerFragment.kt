@@ -124,7 +124,7 @@ class ContainerFragment : BaseMviFragment<MainFragmentContainerBinding>() {
         // 刷新监听
         mBinding.mainRefresh.setAutoCancelRefreshing(viewLifecycleOwner) {
             when(mBinding.mainViewPager.currentItem) {
-                0 -> (mFragmentList[0] as HomeFragment).doOnRefresh { mBinding.mainRefresh.isRefreshing = false }
+                0 -> (mFragmentList[0] as HomeFragment).doOnRefresh(mBinding.mainRefresh)
                 1 -> { }
                 2 -> { }
             }

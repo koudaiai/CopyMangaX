@@ -11,6 +11,8 @@ import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.setMargins
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.crow.base.R.*
@@ -24,6 +26,8 @@ import com.crow.module_home.model.resp.homepage.*
 import com.crow.module_home.model.resp.homepage.results.RecComicsResult
 import com.crow.module_home.ui.fragment.HomeFragment
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 
 /*************************
@@ -42,7 +46,7 @@ class HomeBookAdapter1<T>(
 
     inner class ViewHolder(val rvBinding: HomeRvBookParentBinding) : RecyclerView.ViewHolder(rvBinding.root) { var mPathWord: String = "" }
 
-    fun interface RecRefreshListener { fun onRefresh() }
+    fun interface RecRefreshListener { fun onRefresh(button: MaterialButton) }
 
     companion object {
         private const val UPDATE_3 = 3
@@ -50,6 +54,14 @@ class HomeBookAdapter1<T>(
         private const val UPDATE_6 = 6
         private const val UPDATE_12 = 12
     }
+
+    // 漫画卡片高度
+    private val mChildCardHeight: Int = run {
+        val width = appContext.resources.displayMetrics.widthPixels
+        val height = appContext.resources.displayMetrics.heightPixels
+        (width.toFloat() / (3 - width.toFloat() / height.toFloat())).toInt()
+    }
+
 
     private lateinit var mRecRefreshButton: MaterialButton
 
@@ -63,6 +75,7 @@ class HomeBookAdapter1<T>(
 
     override fun getItemCount(): Int = if (mData == null) 0 else mData!!.size
 
+    private var isEnd = false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(inflate(from(parent.context), parent, false))
 
     override fun onBindViewHolder(vh: ViewHolder, pos: Int) {
@@ -120,7 +133,7 @@ class HomeBookAdapter1<T>(
             iconTint = null
             iconPadding = appContext.resources.getDimensionPixelSize(dimen.base_dp6)
             text = appContext.getString(R.string.home_refresh)
-            clickGap(500) { _, _ -> mRecRefreshListener?.onRefresh() }
+            clickGap(500) { _, _ -> mRecRefreshListener?.onRefresh(this) }
         }
     }
 
@@ -131,7 +144,14 @@ class HomeBookAdapter1<T>(
     fun setData(value: ArrayList<T>) { mData = value }
 
     // 对外暴露设置推荐数据
-    fun setRecData(value: List<RecComicsResult>) {
-        (mData?.get(0) as ComicDatas<RecComicsResult>).mResult = value
+    fun notifyRec(lifecycleOwner: LifecycleOwner, value: ComicDatas<RecComicsResult>) {
+        lifecycleOwner.lifecycleScope.launch {
+            mHomeRecAdapter.setData(value)
+            mHomeRecAdapter.notifyItemChanged(0)
+            delay(10L)
+            mHomeRecAdapter.notifyItemChanged(1)
+            delay(10L)
+            mHomeRecAdapter.notifyItemChanged(2)
+        }
     }
 }

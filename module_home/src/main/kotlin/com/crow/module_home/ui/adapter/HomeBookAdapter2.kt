@@ -10,8 +10,7 @@ import androidx.core.view.doOnLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.crow.base.app.appContext
-import com.crow.base.extensions.clickGap
-import com.crow.base.extensions.formatValue
+import com.crow.base.extensions.*
 import com.crow.base.view.ToolTipsView
 import com.crow.module_home.databinding.HomeRvBookBinding
 import com.crow.module_home.model.ComicType
@@ -55,12 +54,14 @@ class HomeBookAdapter2<T>(
         return ViewHolder(HomeRvBookBinding.inflate(LayoutInflater.from(parent.context), parent, false)).also { vh ->
 
             // 漫画卡片高度
-            vh.rvBinding.homeBookImage.doOnLayout { vh.rvBinding.homeBookImage.layoutParams.height = mChildCardHeight }
-
-            // 设置父布局 固定高度 （因为最外层还有一个父布局卡片布局设置的时WRAP_CONTENT 根据 子控件决定高度的）
-            vh.rvBinding.root.doOnLayout { rooView ->
-                mParentHeight = mParentHeight ?: rooView.height
-                rooView.layoutParams.height = mParentHeight!!
+            vh.rvBinding.root.doOnLayout {
+                vh.rvBinding.homeBookImage.layoutParams.height = mChildCardHeight
+                mParentHeight = mParentHeight ?: if (vh.rvBinding.homeBookName.lineCount > 1) {
+                    it.height + mChildCardHeight
+                } else {
+                    it.height + vh.rvBinding.homeBookName.height + mChildCardHeight
+                }
+                it.layoutParams.height = mParentHeight!!
             }
 
             // 点击 父布局卡片 以及漫画卡片 事件 回调给上级 HomeFragment --> ContainerFragment

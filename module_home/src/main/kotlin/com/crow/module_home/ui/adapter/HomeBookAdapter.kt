@@ -51,17 +51,20 @@ class HomeBookAdapter<T>(
     private var mParentHeight: Int? = null
 
     override fun getItemCount(): Int = if (mData == null) 0 else mSize
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(HomeRvBookBinding.inflate(LayoutInflater.from(parent.context), parent, false)).also { vh ->
 
-            // 漫画卡片高度
-            vh.rvBinding.homeBookImage.doOnLayout { vh.rvBinding.homeBookImage.layoutParams.height = mChildCardHeight }
+                // 漫画卡片高度
+                vh.rvBinding.homeBookImage.doOnLayout {
+                    vh.rvBinding.homeBookImage.layoutParams.height = mChildCardHeight
+                }
 
-            // 设置父布局 固定高度 （因为最外层还有一个父布局卡片布局设置的时WRAP_CONTENT 根据 子控件决定高度的）
-            vh.rvBinding.root.doOnLayout { rooView ->
-                mParentHeight = mParentHeight ?: rooView.height
-                rooView.layoutParams.height = mParentHeight!!
-            }
+                // 设置父布局 固定高度 （因为最外层还有一个父布局卡片布局设置的时WRAP_CONTENT 根据 子控件决定高度的）
+                vh.rvBinding.root.doOnLayout { rooView ->
+                    mParentHeight = mParentHeight ?: rooView.height
+                    rooView.layoutParams.height = mParentHeight!! * 2
+                }
 
             // 点击 父布局卡片 以及漫画卡片 事件 回调给上级 HomeFragment --> ContainerFragment
             vh.rvBinding.root.clickGap { _, _ -> mTapComicListener.onTap(mType, vh.mPathWord) }
