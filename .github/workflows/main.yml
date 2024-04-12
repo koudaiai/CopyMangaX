@@ -23,8 +23,7 @@ jobs:
       - name: aaa
         run: |
           rmdir lib_mangax/src/main/jni/OpenCC
-          done
-      - name: aaa
+      - name: bbb
         run: 
           git submodule add -f --name OpenCC -b master https://github.com/BYVoid/OpenCC.git lib_mangax/src/main/jni/OpenCC
       - name: Build APK
