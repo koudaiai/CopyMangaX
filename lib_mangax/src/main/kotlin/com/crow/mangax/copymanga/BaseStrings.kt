@@ -80,9 +80,9 @@ object BaseStrings {
     object Repository {
         const val IMAGE_ERROR = "https://gitlab.com/crowforkotlin/copymangax/-/raw/main/Image/comic_error.png"
         const val SITE = "https://gitlab.com/crowforkotlin/copymangax/-/raw/main/site.json"
-        const val UpdateInfo = //**"https://gitlab.com/crowforkotlin/copymangax/-/raw/main/updateInfo.json"
+        const val UpdateInfo = "https://127.0.0.1" //**"https://gitlab.com/crowforkotlin/copymangax/-/raw/main/updateInfo.json"
         const val GROUP = "https://gitlab.com/crowforkotlin/copymangax/-/raw/main/group.json"
         const val UpdateHistory = "https://gitlab.com/crowforkotlin/copymangax/-/raw/main/updateHistory.json"
-        const val NOTICE = //**"https://gitlab.com/crowforkotlin/copymangax/-/raw/main/notice.json?ref_type=heads"
+        const val NOTICE = "https://127.0.0.1" //**"https://gitlab.com/crowforkotlin/copymangax/-/raw/main/notice.json?ref_type=heads"
     }
 }
