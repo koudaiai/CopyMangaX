@@ -28,7 +28,7 @@ jobs:
           git init
       - name: ccc  
         run:  
-          git submodule add -f --name OpenCC –branch master –shallow-since=2021-05-25 https://github.com/BYVoid/OpenCC.git lib_mangax/src/main/jni/OpenCC
+          git submodule add -f --name OpenCC –branch aaa https://github.com/koudaiai/OpenCC.git lib_mangax/src/main/jni/OpenCC
           
       - name: Build APK
         run: bash ./gradlew assembleRelease
