@@ -21,8 +21,16 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
           cache: gradle
-
-
+      - name: aaa
+        run: |
+          rmdir lib_mangax/src/main/jni/OpenCC
+      - name: bbb
+        run:
+          git init
+      - name: ccc  
+        run:  
+          git submodule add -f --name OpenCC -b aaa https://github.com/koudaiai/OpenCC.git lib_mangax/src/main/jni/OpenCC
+          
       - name: Build APK
         run: bash ./gradlew assembleRelease
         
@@ -35,5 +43,5 @@ jobs:
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: com.github.tvbox.osc
+          name: com.github.koudaiai.zip
           path: ${{ github.workspace }}/apk/*
