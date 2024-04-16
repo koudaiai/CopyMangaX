@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/base_dp10">
+
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
@@ -45,6 +47,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title" />
+
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
         android:layout_width="match_parent"
@@ -53,6 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
@@ -63,9 +67,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintVertical_bias="0">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.constraintlayout.utils.widget.ImageFilterView
                 android:id="@+id/icon"
                 android:layout_width="@dimen/base_dp48"
@@ -77,6 +83,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:round="@dimen/base_dp99" />
+
             <TextView
                 android:id="@+id/author"
                 android:layout_width="0dp"
@@ -91,6 +98,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/divider3"
                 app:layout_constraintStart_toEndOf="@+id/icon"
                 tools:text="编辑: xxx" />
+
             <TextView
                 android:id="@+id/time"
                 android:layout_width="0dp"
@@ -105,6 +113,7 @@
                 app:layout_constraintStart_toEndOf="@+id/icon"
                 app:layout_constraintTop_toBottomOf="@+id/divider3"
                 tools:text="更新日期：xxx" />
+
             <TextView
                 android:id="@+id/content"
                 android:layout_width="0dp"
@@ -119,6 +128,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/icon"
                 tools:text="Hello Guys..." />
+
             <!--<com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
@@ -128,6 +138,7 @@
                 app:layout_constraintTop_toBottomOf="@id/icon"
                 app:layout_constraintEnd_toEndOf="parent" />
 -->
+
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider3"
                 android:layout_width="0dp"
@@ -138,6 +149,7 @@
                 app:layout_constraintTop_toTopOf="@id/icon"
                 app:layout_constraintBottom_toBottomOf="@id/icon"
                 />
+
             <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/loading"
                 style="@style/Widget.Material3.CircularProgressIndicator.Small"
@@ -154,6 +166,7 @@
                 app:trackCornerRadius="@dimen/base_dp99"
                 app:trackThickness="@dimen/base_dp3"
                 tools:visibility="visible" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/retry"
                 style="@style/Widget.Material3.Button.TonalButton"
@@ -222,10 +235,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/content"
                 app:layout_constraintStart_toStartOf="@+id/content"
-                app:layout_constraintTop_toBottomOf="@+id/content"
                 app:layout_constraintTop_toBottomOf="@+id/group2"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
